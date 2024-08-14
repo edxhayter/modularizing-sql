@@ -1,3 +1,8 @@
+-- configure a packages.yml file to get access to the dbt audit macro
+-- dbt deps to install the package to the project.
+
+-- Requries the setting of two arguments which will be our legacy query and the table the final refactored model produces.
+
 with audit_check as (
 
 {% set legacy_query %}

@@ -1,3 +1,5 @@
+-- Leaving this one complete for time-sake, want time to cover the final model along with audit tests and testing in general.
+
 -- staging models used are orders and payments
 
 with orders as(
@@ -35,7 +37,7 @@ add_customer_details as (
     select
 
         orders.customer_id,
-        
+
         payment_stats.*
 
     from orders
