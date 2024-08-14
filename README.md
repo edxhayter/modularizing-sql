@@ -4,8 +4,9 @@
 
 Welcome to the **Legacy SQL to Modularized dbt Demo** repository. This repository is part of an internal upskilling session designed to demonstrate the benefits of modularizing SQL code using dbt. The repository includes two key branches:
 
-- **`main` branch:** Contains a starter legacy SQL script that represents how code might be written in a non-modular, monolithic way.
+- **`starter` branch:** Contains a starter legacy SQL script that represents how code might be written in a non-modular, monolithic way.
 - **`modularized` branch:** Contains a refactored version of the legacy SQL script, where the code has been modularized to demonstrate best practices in dbt.
+- **`main` branch:** Is the same as the modularized branch and loads the solution by default.
 
 ## Purpose
 
@@ -67,10 +68,10 @@ We configured a `sources.yml` file to define our data sources. For simplicity, w
 
 ## Getting Started
 
-1. **Explore the `main` branch:**
+1. **Explore the `starter` branch:**
    - Review the legacy SQL script to understand its original structure.
    
-2. **Switch to the `modularized` branch:**
+2. **Switch to the `modularized` or `main` branch:**
    - Explore the refactored, modularized version.
    - Observe how the logic is broken down into reusable components.
 
