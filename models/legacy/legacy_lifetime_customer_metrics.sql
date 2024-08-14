@@ -17,11 +17,12 @@ WITH order_payment_stats AS (
 -- Main query aggregates the previous CTE data to the customer level (as opposed to order level) and also adds a first_order_date for context.
 SELECT
     c.id AS customer_id,
-    c.first_name || ' ' || c.last_name AS customer_name,
+    c.first_name || ' ' || c.last_name AS full_name,
     fo.first_order_date,
-    SUM(ops.total_order_amount) AS total_spent,
+    sum(ops.number_of_payments) as total_payments,
     COUNT(ops.order_id) AS total_orders,
-    AVG(ops.total_order_amount) AS avg_spend_per_order
+    SUM(ops.total_order_amount) AS total_spend,
+    AVG(ops.total_order_amount) AS avg_order_value
 FROM til_portfolio_projects.jaffle_shop.customers c
 LEFT JOIN (
     SELECT 
@@ -35,7 +36,7 @@ LEFT JOIN order_payment_stats ops
     ON c.id = ops.customer_id
 GROUP BY c.id, c.first_name, c.last_name, fo.first_order_date
 HAVING total_orders >= 1
-ORDER BY total_spent DESC
+ORDER BY total_spend DESC
 
 
 -- Sources: 
@@ -49,4 +50,4 @@ ORDER BY total_spent DESC
 
 -- Mart:
 
--- customer_orders, just a single join bringing our intermediary models together.
+-- customer_spend, just a single join bringing our intermediary models together.

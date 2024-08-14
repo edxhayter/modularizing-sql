@@ -1,18 +1,4 @@
-SELECT
-    c.id AS customer_id,
-    c.first_name || ' ' || c.last_name AS customer_name,
-    fo.first_order_date
-
-FROM til_portfolio_projects.jaffle_shop.customers c
-LEFT JOIN (
-    SELECT 
-        o.user_id AS customer_id,
-        MIN(o.order_date) AS first_order_date
-    FROM til_portfolio_projects.jaffle_shop.orders o
-    GROUP BY o.user_id
-) AS fo
-    ON c.id = fo.customer_id
-GROUP BY c.id, c.first_name, c.last_name, fo.first_order_date
+-- Can be the already done example of an intermediary model or a You Do depending on time in session.
 
 -- Stage Tables we will need: stg_orders, stg_customers
 
@@ -28,19 +14,40 @@ customers as (
 
 ),
 
+-- logic of finding first order as CTE rather than sub query so that it is split out
+
 customer_first_order as (
 
     select 
 
-)
+        customer_id,
+        min(order_date) as first_order_date
+
+    from orders
+    group by customer_id
+
+),
+
+-- feature of intermediary model is joining building blocks together.
 
 customer_details as (
 
     select
+        
+        customers.customer_id,
+        customers.full_name,
+        
+        customer_first_order.first_order_date
 
+    from customers
+    left join customer_first_order on customers.customer_id = customer_first_order.customer_id
 
+),
 
-    from
+final as (
 
+    select * from customer_details
 
 )
+
+select * from final
