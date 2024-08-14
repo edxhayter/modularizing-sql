@@ -36,7 +36,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  mmodularizing_sql_demo:
+  modularizing_sql_demo:
     # Applies to all files under models/example/
-    example:
+    staging:
+      +materialized: view
+    mart:
       +materialized: table
