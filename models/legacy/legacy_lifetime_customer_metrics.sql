@@ -36,3 +36,17 @@ LEFT JOIN order_payment_stats ops
 GROUP BY c.id, c.first_name, c.last_name, fo.first_order_date
 HAVING total_orders >= 1
 ORDER BY total_spent DESC
+
+
+-- Sources: 
+-- Jaffle -> customers, orders
+-- Stripe -> payment
+
+
+-- Intermediary:
+-- int_order_payments, orders and payments brought together (that might have a use case another developer needs it for)
+-- int customer_details, customer details and first purchase date (might have other uses and can be further expanded by another developer)
+
+-- Mart:
+
+-- customer_orders, just a single join bringing our intermediary models together.
